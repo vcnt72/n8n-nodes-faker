@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
 	IExecuteFunctions,
 	INodeExecutionData,
@@ -82,7 +83,7 @@ export class Faker implements INodeType {
 			// Node properties which the user gets displayed and
 			// can change on the node.
 			{
-				displayName: 'Number of records',
+				displayName: 'Number of Records',
 				name: 'count',
 				type: 'number',
 				default: 1,
@@ -90,8 +91,8 @@ export class Faker implements INodeType {
 				description: 'How many fake records to generate',
 			},
 			{
-				default: {},
 				displayName: 'Fields',
+				default: {},
 				name: 'fields',
 				type: 'fixedCollection',
 				typeOptions: {
@@ -103,57 +104,12 @@ export class Faker implements INodeType {
 						displayName: 'Field',
 						values: [
 							{
-								displayName: 'Field Name',
-								name: 'key',
+								displayName: 'Choices',
+								name: 'choices',
 								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Generator',
-								name: 'gen',
-								type: 'options',
-								default: '',
-								options: [
-									{ name: 'Full Name', value: 'fullName' },
-									{ name: 'First Name', value: 'firstName' },
-									{ name: 'Last Name', value: 'lastName' },
-									{ name: 'Email', value: 'email' },
-									{ name: 'Phone', value: 'phone' },
-									{ name: 'Company', value: 'company' },
-									{ name: 'Address', value: 'address' },
-									{ name: 'City', value: 'city' },
-									{ name: 'Country', value: 'country' },
-									{ name: 'UUID', value: 'uuid' },
-									{ name: 'Integer', value: 'int' },
-									{ name: 'Float', value: 'float' },
-									{ name: 'Boolean', value: 'bool' },
-									{ name: 'Date (Past)', value: 'datePast' },
-									{ name: 'Date (Future)', value: 'dateFuture' },
-									{ name: 'Lorem Sentence', value: 'loremSentence' },
-									{ name: 'Lorem Paragraph', value: 'loremParagraph' },
-									{ name: 'Pick From List', value: 'oneOf' },
-								],
-							},
-							{
-								displayName: 'Min',
-								name: 'min',
-								type: 'number',
-								default: 0,
-								displayOptions: { show: { gen: ['int', 'float'] } },
-							},
-							{
-								displayName: 'Max',
-								name: 'max',
-								type: 'number',
-								default: 100,
-								displayOptions: { show: { gen: ['int', 'float'] } },
-							},
-							{
-								displayName: 'Decimals',
-								name: 'decimals',
-								type: 'number',
-								default: 2,
-								displayOptions: { show: { gen: ['float'] } },
+								placeholder: 'new,active,churn',
+								default: 'new,active,churn',
+								displayOptions: { show: { gen: ['oneOf'] } },
 							},
 							{
 								displayName: 'Days Range',
@@ -163,12 +119,57 @@ export class Faker implements INodeType {
 								displayOptions: { show: { gen: ['datePast', 'dateFuture'] } },
 							},
 							{
-								displayName: 'Choices',
-								name: 'choices',
+								displayName: 'Decimals',
+								name: 'decimals',
+								type: 'number',
+								default: 2,
+								displayOptions: { show: { gen: ['float'] } },
+							},
+							{
+								displayName: 'Field Name',
+								name: 'key',
 								type: 'string',
-								placeholder: 'new,active,churn',
-								default: 'new,active,churn',
-								displayOptions: { show: { gen: ['oneOf'] } },
+								default: '',
+							},
+							{
+								displayName: 'Generator',
+								name: 'gen',
+								type: 'options',
+								default: 'email',
+								options: [
+									{ name: 'Address', value: 'address' },
+									{ name: 'Boolean', value: 'bool' },
+									{ name: 'City', value: 'city' },
+									{ name: 'Company', value: 'company' },
+									{ name: 'Country', value: 'country' },
+									{ name: 'Date (Future)', value: 'dateFuture' },
+									{ name: 'Date (Past)', value: 'datePast' },
+									{ name: 'Email', value: 'email' },
+									{ name: 'First Name', value: 'firstName' },
+									{ name: 'Float', value: 'float' },
+									{ name: 'Full Name', value: 'fullName' },
+									{ name: 'Integer', value: 'int' },
+									{ name: 'Last Name', value: 'lastName' },
+									{ name: 'Lorem Paragraph', value: 'loremParagraph' },
+									{ name: 'Lorem Sentence', value: 'loremSentence' },
+									{ name: 'Phone', value: 'phone' },
+									{ name: 'Pick From List', value: 'oneOf' },
+									{ name: 'UUID', value: 'uuid' },
+								],
+							},
+							{
+								displayName: 'Max',
+								name: 'max',
+								type: 'number',
+								default: 100,
+								displayOptions: { show: { gen: ['int', 'float'] } },
+							},
+							{
+								displayName: 'Min',
+								name: 'min',
+								type: 'number',
+								default: 0,
+								displayOptions: { show: { gen: ['int', 'float'] } },
 							},
 							{
 								displayName: 'Null %',
@@ -195,7 +196,10 @@ export class Faker implements INodeType {
 		const faker = baseFaker;
 		for (let i = 0; i < count; i++) {
 			const row: any = {};
-			for (const f of fields) row[f.key] = genValue(faker, f);
+			for (const f of fields) {
+				row[f.key] = genValue(faker, f);
+				row[`${f.key}_${typeof f}`] = true;
+			}
 			items.push({ json: row });
 		}
 		return [items];
