@@ -1,46 +1,63 @@
-# n8n-nodes-faker
+# n8n-nodes-faker (Unofficial)
 
-This is an n8n community node. It lets you use _app/service name_ in your n8n workflows.
+A custom **n8n node** that generates random data using [@faker-js/faker](https://github.com/faker-js/faker).  
+This node is useful for creating **test data**, seeding databases, or populating services like **Airtable**, **Google Sheets**, or **CRMs** directly inside n8n workflows.
 
-_App/service name_ is _one or two sentences describing the service this node integrates with_.
+⚠️ **Disclaimer**: This is an **unofficial node**. It is not maintained, endorsed, or supported by the n8n team.
 
-[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
+---
 
-[Installation](#installation)
-[Operations](#operations)
-[Credentials](#credentials)
-[Compatibility](#compatibility)
-[Usage](#usage)
-[Resources](#resources)
-[Version history](#version-history)
+## ✨ Features
 
-## Installation
+- Generate fake records with configurable **count**.
+- Supports common fields:
+  - Name
+  - Email
+  - Phone
+  - Company
+  - Address
+  - Lorem text
+- Output in standard JSON format, ready to connect to other n8n nodes.
+- Select **locale** (e.g. `en`, `fr`, `de`) to generate localized data.
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+---
 
-## Operations
+## 📦 Installation
 
-_List the operations supported by your node._
+1. Clone or download this repository.
+2. Install dependencies (Faker):
 
-## Credentials
+   ```bash
+   npm install
+   npm install @faker-js/faker
+   Build the node:
+   ```
 
-_If users need to authenticate with the app/service, provide details here. You should include prerequisites (such as signing up with the service), available authentication methods, and how to set them up._
+Copy code
 
-## Compatibility
+```bash
+npm run build
+```
 
-_State the minimum n8n version, as well as which versions you test against. You can also include any known version incompatibility issues._
+Symlink or copy the built package into your n8n custom nodes folder:
 
-## Usage
+Configure:
 
-_This is an optional section. Use it to help users with any difficult or confusing aspects of the node._
+- Number of Records → how many items to generate (default = 1).
+- Fields → choose which fields you want included.
+- Connect the output to Airtable, Sheets, or any other node.
 
-_By the time users are looking for community nodes, they probably already know n8n basics. But if you expect new users, you can link to the [Try it out](https://docs.n8n.io/try-it-out/) documentation to help them get started._
+Example output
 
-## Resources
-
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
-* _Link to app/service documentation._
-
-## Version history
-
-_This is another optional section. If your node has multiple versions, include a short description of available versions and what changed, as well as any compatibility impact._
+```json
+Copy code
+[
+  {
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com",
+    "phone": "(123) 456-7890",
+    "company": "Acme Corp",
+    "address": "123 Main Street"
+  }
+]
+```
