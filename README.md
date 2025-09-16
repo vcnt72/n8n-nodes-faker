@@ -18,7 +18,6 @@ This node is useful for creating **test data**, seeding databases, or populating
   - Address
   - Lorem text
 - Output in standard JSON format, ready to connect to other n8n nodes.
-- Select **locale** (e.g. `en`, `fr`, `de`) to generate localized data.
 
 ---
 
@@ -30,10 +29,7 @@ This node is useful for creating **test data**, seeding databases, or populating
    ```bash
    npm install
    npm install @faker-js/faker
-   Build the node:
    ```
-
-Copy code
 
 ```bash
 npm run build
@@ -50,14 +46,13 @@ Configure:
 Example output
 
 ```json
-Copy code
 [
-  {
-    "name": "Jane Doe",
-    "email": "jane.doe@example.com",
-    "phone": "(123) 456-7890",
-    "company": "Acme Corp",
-    "address": "123 Main Street"
-  }
+ {
+  "name": "Jane Doe",
+  "email": "jane.doe@example.com",
+  "phone": "(123) 456-7890",
+  "company": "Acme Corp",
+  "address": "123 Main Street"
+ }
 ]
 ```

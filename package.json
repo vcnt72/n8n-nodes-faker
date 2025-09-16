@@ -3,7 +3,7 @@
 	"version": "0.1.6",
 	"description": "Unoffical faker node",
 	"license": "MIT",
-	"homepage": "https://example.com",
+	"homepage": "https://github.com/vcnt72/n8n-nodes-faker",
 	"keywords": [
 		"n8n-community-node-package"
 	],
