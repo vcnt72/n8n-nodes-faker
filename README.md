@@ -3,7 +3,7 @@
 A custom **n8n node** that generates random data using [@faker-js/faker](https://github.com/faker-js/faker).  
 This node is useful for creating **test data**, seeding databases, or populating services like **Airtable**, **Google Sheets**, or **CRMs** directly inside n8n workflows.
 
-⚠️ **Disclaimer**: This is an **unofficial node**. It is not maintained, endorsed, or supported by the n8n team.
+⚠️ **Disclaimer**: This is an **unofficial node**. It is not maintained, endorsed, or supported by the n8n team or by fakerjs team.
 
 ---
 

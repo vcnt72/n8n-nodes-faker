@@ -198,7 +198,6 @@ export class Faker implements INodeType {
 			const row: any = {};
 			for (const f of fields) {
 				row[f.key] = genValue(faker, f);
-				row[`${f.key}_${typeof f}`] = true;
 			}
 			items.push({ json: row });
 		}
