@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-faker",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"description": "Unoffical faker node",
 	"license": "MIT",
 	"homepage": "https://github.com/vcnt72/n8n-nodes-faker",
