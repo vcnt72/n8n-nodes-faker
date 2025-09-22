@@ -26,7 +26,9 @@ function genValue(faker: typeof baseFaker, f: any) {
 		case 'email':
 			return faker.internet.email();
 		case 'phone':
-			return faker.phone.number();
+			return faker.phone.number({
+				style: f.phoneStyle ?? 'human',
+			});
 		case 'company':
 			return faker.company.name();
 		case 'address':
@@ -217,6 +219,26 @@ export class Faker implements INodeType {
 								type: 'number',
 								default: 0,
 								description: 'Chance to return null 0–100',
+							},
+							{
+								displayName: 'Phone Styles',
+								name: 'phoneStyle',
+								type: 'options',
+								default: 'human',
+								options: [
+									{
+										name: 'Human',
+										value: 'human',
+									},
+									{
+										name: 'National',
+										value: 'national',
+									},
+									{
+										name: 'International',
+										value: 'international',
+									},
+								],
 							},
 						],
 					},
