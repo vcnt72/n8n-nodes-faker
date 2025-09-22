@@ -225,6 +225,7 @@ export class Faker implements INodeType {
 								name: 'phoneStyle',
 								type: 'options',
 								default: 'human',
+								displayOptions: { show: { gen: ['phone'] } },
 								options: [
 									{
 										name: 'Human',
