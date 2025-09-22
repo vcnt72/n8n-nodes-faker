@@ -62,6 +62,36 @@ function genValue(faker: typeof baseFaker, f: any) {
 				.filter(Boolean);
 			return arr.length ? arr[Math.floor(Math.random() * arr.length)] : null;
 		}
+
+		// --- New food cases ---
+		case 'foodDish':
+			return faker.food.dish();
+		case 'foodFruit':
+			return faker.food.fruit();
+		case 'foodVegetable':
+			return faker.food.vegetable();
+		case 'foodIngredient':
+			return faker.food.ingredient();
+		case 'foodSpice':
+			return faker.food.spice();
+
+		// --- New commerce/product cases ---
+		case 'productName':
+			return faker.commerce.productName(); // "Practical Wooden Chair"
+		case 'productCategory':
+			return faker.commerce.department(); // "Tools"
+		case 'productDescription':
+			return faker.commerce.productDescription(); // Short description
+		case 'productPrice':
+			return parseFloat(
+				faker.commerce.price({
+					min: f.min ?? 5,
+					max: f.max ?? 500,
+					dec: f.decimals ?? 2,
+				}),
+			);
+		case 'productSKU':
+			return faker.string.alphanumeric({ length: 8 }).toUpperCase();
 		default:
 			return null;
 	}
@@ -123,7 +153,7 @@ export class Faker implements INodeType {
 								name: 'decimals',
 								type: 'number',
 								default: 2,
-								displayOptions: { show: { gen: ['float'] } },
+								displayOptions: { show: { gen: ['float', 'productPrice'] } },
 							},
 							{
 								displayName: 'Field Name',
@@ -147,6 +177,11 @@ export class Faker implements INodeType {
 									{ name: 'Email', value: 'email' },
 									{ name: 'First Name', value: 'firstName' },
 									{ name: 'Float', value: 'float' },
+									{ name: 'Food Dish', value: 'foodDish' },
+									{ name: 'Food Fruit', value: 'foodFruit' },
+									{ name: 'Food Ingredient', value: 'foodIngredient' },
+									{ name: 'Food Spice', value: 'foodSpice' },
+									{ name: 'Food Vegetable', value: 'foodVegetable' },
 									{ name: 'Full Name', value: 'fullName' },
 									{ name: 'Integer', value: 'int' },
 									{ name: 'Last Name', value: 'lastName' },
@@ -154,6 +189,11 @@ export class Faker implements INodeType {
 									{ name: 'Lorem Sentence', value: 'loremSentence' },
 									{ name: 'Phone', value: 'phone' },
 									{ name: 'Pick From List', value: 'oneOf' },
+									{ name: 'Product Category', value: 'productCategory' },
+									{ name: 'Product Description', value: 'productDescription' },
+									{ name: 'Product Name', value: 'productName' },
+									{ name: 'Product Price', value: 'productPrice' },
+									{ name: 'Product SKU', value: 'productSKU' },
 									{ name: 'UUID', value: 'uuid' },
 								],
 							},
@@ -162,14 +202,14 @@ export class Faker implements INodeType {
 								name: 'max',
 								type: 'number',
 								default: 100,
-								displayOptions: { show: { gen: ['int', 'float'] } },
+								displayOptions: { show: { gen: ['int', 'float', 'productPrice'] } },
 							},
 							{
 								displayName: 'Min',
 								name: 'min',
 								type: 'number',
 								default: 0,
-								displayOptions: { show: { gen: ['int', 'float'] } },
+								displayOptions: { show: { gen: ['int', 'float', 'productPrice'] } },
 							},
 							{
 								displayName: 'Null %',
